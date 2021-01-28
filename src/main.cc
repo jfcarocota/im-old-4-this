@@ -60,7 +60,7 @@ int main()
 
 
     //Main player
-    Character* character1{new Character(texturePlayer, 0 * 1, 0 * 1, 78 / 6, 25 / 2, 
+    Character* character1{new Character(texturePlayer, 0 * 1, 0 * 1, 78 / 6, 27 / 2, 
     SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(400, 300), b2BodyType::b2_dynamicBody, world, window)};
     character1->SetAnimations(
         new Animation*[2]
@@ -71,7 +71,7 @@ int main()
     );
     
     character1->SetTagName("player");
-    //character1->SetDebug(true);
+    character1->SetDebug(true);
 
     unsigned int N{10}, M{13};
     Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTexture3, MAZE1, world)};
@@ -161,7 +161,7 @@ int main()
             }
         }
 
-        window->clear(*(new sf::Color(150, 100, 0, 255)));//lipiar la pantalla
+        window->clear(*(new sf::Color(150, 100, 0, 255)));//limpiar la pantalla
 
         for(auto& mazeTile : *currentMaze->GetContainer())
         {

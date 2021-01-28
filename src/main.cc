@@ -1,7 +1,5 @@
-#include<iostream>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include<box2d/box2d.h>
+
+#include "CommonHeaders.hh"
 
 #include "Maze.hh"
 #include "Inputs.hh"
@@ -12,18 +10,7 @@
 #include "Score.hh"
 #include "GUI/Button.hh"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-#define GAME_NAME "Im old 4 this"
-#define TILES1 "assets/sprites/tiles1.png"
-#define TILES2 "assets/sprites/tiles2.png"
-#define TILES3 "assets/sprites/tiles3.png"
-#define FONT1 "assets/fonts/8-bit Arcade In.ttf"
-#define ICON "assets/swordIcon.png"
-#define BG_MUSIC "assets/audio/bgmusic.ogg"
-#define SPRITE_SCALE 4.f
-#define FPS 120
-#define PLAYER_MOVESPEED 3.0f
+#include "AssetsPath.hh"
 
 int main()
 {

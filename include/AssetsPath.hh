@@ -6,3 +6,5 @@
 #define FONT1 "assets/fonts/8-bit Arcade In.ttf"
 #define ICON "assets/swordIcon.png"
 #define BG_MUSIC "assets/audio/bgmusic.ogg"
+#define MAZE1 "assets/mazes/maze1.txt"
+#define MAZE2 "assets/mazes/maze2.txt"

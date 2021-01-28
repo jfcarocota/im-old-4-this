@@ -72,8 +72,8 @@ int main()
     //character1->SetDebug(true);
 
     unsigned int N{10}, M{13};
-    Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTexture3, "assets/mazes/maze1.txt", world)};
-    Maze* maze2{new Maze(N, M, SPRITE_SCALE, 16, tilesTexture3, "assets/mazes/maze2.txt", world)};
+    Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTexture3, MAZE1, world)};
+    Maze* maze2{new Maze(N, M, SPRITE_SCALE, 16, tilesTexture3, MAZE2, world)};
     Maze*& currentMaze{*&maze1};
 
     GameObject* treasure{new GameObject(tilesTexture3, 16 * 19, 16 * 19, 16, 16, 

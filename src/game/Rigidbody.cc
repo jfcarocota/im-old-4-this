@@ -26,8 +26,10 @@ Rigidbody::~Rigidbody()
 {
     //delete fixture;
     //world->DestroyBody(body);
+
     fixture->SetSensor(true);
     body->SetUserData(nullptr);
+    
     //std::cout << "delete body" << std::endl;
     /*body->DestroyFixture(fixture);
     body->SetUserData(nullptr);

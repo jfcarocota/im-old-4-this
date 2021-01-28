@@ -46,6 +46,8 @@ int main()
     //Game inputs
     Inputs* inputs{new Inputs()};
     //Textures
+    sf::Texture* texturePlayer{new sf::Texture()};
+    texturePlayer->loadFromFile(SS_OLDGUY);
     sf::Texture* tilesTexture1{new sf::Texture()};
     tilesTexture1->loadFromFile(TILES1);
     sf::Texture* tilesTexture2{new sf::Texture()};
@@ -58,7 +60,7 @@ int main()
 
 
     //Main player
-    Character* character1{new Character(tilesTexture2, 16 * 1, 16 * 5, 16, 16, 
+    Character* character1{new Character(texturePlayer, 0 * 1, 0 * 1, 78 / 6, 25 / 2, 
     SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(400, 300), b2BodyType::b2_dynamicBody, world, window)};
     character1->SetAnimations(
         new Animation*[2]
@@ -134,12 +136,12 @@ int main()
             if(std::abs(joystickAxis->x) > 0 || std::abs(joystickAxis->y) > 0)
             {
                 //run
-                character1->GetAnimation(1)->Play(deltaTime);
+                //character1->GetAnimation(1)->Play(deltaTime);
             }
             else
             {
                 //idle
-                character1->GetAnimation(0)->Play(deltaTime);
+                //character1->GetAnimation(0)->Play(deltaTime);
             }
         }
         else
@@ -150,12 +152,12 @@ int main()
             if(std::abs(keyboardAxis->x) > 0 || std::abs(keyboardAxis->y) > 0)
             {
                 //run
-                character1->GetAnimation(1)->Play(deltaTime);
+                //character1->GetAnimation(1)->Play(deltaTime);
             }
             else
             {
                 //idle
-                character1->GetAnimation(0)->Play(deltaTime);
+                //character1->GetAnimation(0)->Play(deltaTime);
             }
         }
 

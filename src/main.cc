@@ -102,11 +102,13 @@ int main()
     stairs->SetTagName("stairs");
     //stairs->SetDebug(true);*/
 
-    HiddenBox* boxLeft {new HiddenBox(world, 1, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
-    HiddenBox* boxRight {new HiddenBox(world, 790, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    HiddenBox* boxLeft {new HiddenBox(world, 0, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    HiddenBox* boxRight {new HiddenBox(world, 750, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    HiddenBox* boxBottom {new HiddenBox(world, 0, WINDOW_HEIGHT - 40, WINDOW_WIDTH, 1, SPRITE_SCALE, window)};
     std::vector<HiddenBox*>* boxes{new std::vector<HiddenBox*>()};
     boxes->push_back(boxLeft);
     boxes->push_back(boxRight);
+    boxes->push_back(boxBottom);
 
     std::vector<GameObject*>* items{new std::vector<GameObject*>()};
     /*items->push_back(treasure);

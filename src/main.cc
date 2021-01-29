@@ -77,7 +77,7 @@ int main()
     character1->SetAnimations(
         new Animation*[2]
         {
-            new Animation(0, 0, 5, character1->GetSprite(), 40.f),
+            new Animation(0, 0, 5, character1->GetSprite(), 80.f),
             new Animation(1, 0, 5, character1->GetSprite(), 80.f)
         }
     );

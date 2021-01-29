@@ -27,6 +27,11 @@ int main()
     sound->setLoop(true);
     sound->play();
 
+    sf::SoundBuffer* soundBufferStepsSFX{new sf::SoundBuffer()};
+    sf::Sound* stepsSfx{new sf::Sound()};
+    soundBufferStepsSFX->loadFromFile(STEPS_SFX);
+    stepsSfx->setBuffer(*soundBufferStepsSFX);
+
     Button* button1{new Button(200.f, 200.f, 150.f, 50.f, 0.5f, new sf::Color(255, 0, 0), new sf::Color(255, 255, 255), window)};
 
     //aqui vas a guardar los eventos dentro de la ventana, eje: teclado, mouse, etc.
@@ -54,6 +59,8 @@ int main()
     tilesTexture2->loadFromFile(TILES2);
     sf::Texture* tilesTexture3{new sf::Texture()};
     tilesTexture3->loadFromFile(TILES3);
+    sf::Texture* tilesTextureMain{new sf::Texture()};
+    tilesTextureMain->loadFromFile(MAIN_TILES);
 
     const float tileBaseWidth{16 * SPRITE_SCALE};
     const float tileBaseHeight{16 * SPRITE_SCALE};
@@ -74,11 +81,11 @@ int main()
     character1->SetDebug(true);
 
     unsigned int N{10}, M{13};
-    Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTexture3, MAZE1, world)};
-    Maze* maze2{new Maze(N, M, SPRITE_SCALE, 16, tilesTexture3, MAZE2, world)};
+    Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZEROOM, world)};
+    Maze* maze2{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZE2, world)};
     Maze*& currentMaze{*&maze1};
 
-    GameObject* treasure{new GameObject(tilesTexture3, 16 * 19, 16 * 19, 16, 16, 
+   /* GameObject* treasure{new GameObject(tilesTexture3, 16 * 19, 16 * 19, 16, 16, 
     SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(400, 400), b2BodyType::b2_staticBody, world, window)}; 
     treasure->SetTagName("item");
     GameObject* treasure2{new GameObject(tilesTexture3, 16 * 19, 16 * 19, 16, 16, 
@@ -88,12 +95,12 @@ int main()
     GameObject* stairs{new GameObject(tilesTexture3, 16 * 3, 16 * 6, 16, 16, 
     SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(510, 510), b2BodyType::b2_staticBody, world, window)};
     stairs->SetTagName("stairs");
-    //stairs->SetDebug(true);
+    //stairs->SetDebug(true);*/
 
     std::vector<GameObject*>* items{new std::vector<GameObject*>()};
-    items->push_back(treasure);
+    /*items->push_back(treasure);
     items->push_back(treasure2);
-    items->push_back(stairs);
+    items->push_back(stairs);*/
 
     ContactListener* conctactListener{new ContactListener(score, items)};
 
@@ -153,6 +160,7 @@ int main()
             {
                 //run
                 character1->GetAnimation(1)->Play(deltaTime);
+                //stepsSfx->play();
             }
             else
             {
@@ -170,16 +178,16 @@ int main()
 
         //stairs->Update();
         
-        for(auto& item : *items)
+        /*for(auto& item : *items)
         {
             item->Update();
-        }
+        }*/
 
         character1->Update();
 
-        button1->Update();
+        //button1->Update();
 
-        score->Update();
+        //score->Update();
 
         window->display(); //mostrar en pantalla lo que se va dibujar
 

@@ -50,37 +50,19 @@ void Maze::Generate()
                     container->push_back(new Tile(cropSize * 1, cropSize * 1, scale, cropSize, texture, world));
                     container->back()->TurnPhysicsOn(cropSize * scale * j, cropSize * scale * i);
                     break;
-                case 'q':
-                    container->push_back(new Tile(cropSize * 1, cropSize * 2, scale, cropSize, texture, world));
-                    container->back()->TurnPhysicsOn(cropSize * scale * j, cropSize * scale * i);
-                    break;
-                case 'e':
-                    container->push_back(new Tile(cropSize * 1, cropSize * 3, scale, cropSize, texture, world));
-                    container->back()->TurnPhysicsOn(cropSize * scale * j, cropSize * scale * i);
-                    break;
-                case 'g':
-                    container->push_back(new Tile(cropSize * 1, cropSize * 4, scale, cropSize, texture));
-                    break;
-                case 'f':
-                    container->push_back(new Tile(cropSize * 2, cropSize * 4, scale, cropSize, texture));
-                    break;
-                case 'd':
-                    container->push_back(new Tile(cropSize * 3, cropSize * 4, scale, cropSize, texture));
-                    break;    
                 case 'a':
-                    container->push_back(new Tile(cropSize * 1, cropSize * 5, scale, cropSize, texture));
+                    container->push_back(new Tile(cropSize * 0, cropSize * 0, scale, cropSize, texture, world));
+                    //container->back()->TurnPhysicsOn(cropSize * scale * j, cropSize * scale * i);
                     break;
                 case 's':
-                    container->push_back(new Tile(cropSize * 2, cropSize * 5, scale, cropSize, texture));
+                    container->push_back(new Tile(cropSize * 1, cropSize * 0, scale, cropSize, texture, world));
+                    //container->back()->TurnPhysicsOn(cropSize * scale * j, cropSize * scale * i);
                     break;
-                case 'z':
-                    container->push_back(new Tile(cropSize * 3, cropSize * 5, scale, cropSize, texture));
+                case 'd':
+                    container->push_back(new Tile(cropSize * 2, cropSize * 0, scale, cropSize, texture));
                     break;
-                case 'x':
-                    container->push_back(new Tile(cropSize * 1, cropSize * 6, scale, cropSize, texture));
-                    break;
-                case 'c':
-                    container->push_back(new Tile(cropSize * 2, cropSize * 6, scale, cropSize, texture));
+                case 'f':
+                    container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
                     break;
                 /*case 'v':
                     container->push_back(new Tile(cropSize * 3, cropSize * 6, scale, cropSize, texture, world));

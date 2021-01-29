@@ -16,5 +16,13 @@ HiddenBox::~HiddenBox()
 void HiddenBox::Update()
 {
     boxCollider->UpdatePhysics();
-    window->draw(*boxCollider->GetBoxShape());
+    if(debug)
+    {
+        window->draw(*boxCollider->GetBoxShape());
+    }
+}
+
+void HiddenBox::SetDebugMode(bool debug)
+{
+    this->debug = debug;
 }

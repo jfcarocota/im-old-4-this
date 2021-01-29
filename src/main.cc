@@ -83,7 +83,7 @@ int main()
     );
     
     character1->SetTagName("player");
-    character1->SetDebug(true);
+    //character1->SetDebug(true);
 
     unsigned int N{10}, M{13};
     Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZEROOM, world)};
@@ -103,6 +103,7 @@ int main()
     //stairs->SetDebug(true);*/
 
     HiddenBox* boxLeft {new HiddenBox(world, 0, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    //boxLeft->SetDebugMode(true);
     HiddenBox* boxRight {new HiddenBox(world, 750, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
     HiddenBox* boxBottom {new HiddenBox(world, 0, WINDOW_HEIGHT - 40, WINDOW_WIDTH, 1, SPRITE_SCALE, window)};
     std::vector<HiddenBox*>* boxes{new std::vector<HiddenBox*>()};

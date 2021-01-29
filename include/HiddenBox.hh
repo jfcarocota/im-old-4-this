@@ -10,9 +10,11 @@ private:
         Rigidbody* rigidbody{};
         BoxCollider* boxCollider{};
         sf::RenderWindow* window;
+        bool debug{};
 public:
     HiddenBox(b2World*& world, float posX, float posY, float width, float height, float scale, sf::RenderWindow*& window);
     ~HiddenBox();
 
     void Update();
+    void SetDebugMode(bool debug);
 };

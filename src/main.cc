@@ -25,12 +25,16 @@ int main()
     soundBuffer->loadFromFile(BG_MUSIC);
     sound->setBuffer(*soundBuffer);
     sound->setLoop(true);
+    sound->setVolume(10.f);
     sound->play();
 
     sf::SoundBuffer* soundBufferStepsSFX{new sf::SoundBuffer()};
     sf::Sound* stepsSfx{new sf::Sound()};
     soundBufferStepsSFX->loadFromFile(STEPS_SFX);
     stepsSfx->setBuffer(*soundBufferStepsSFX);
+    stepsSfx->setVolume(4.f);
+    float stepDelay{0.3f};
+    float currentStepSFXTime {stepDelay};
 
     Button* button1{new Button(200.f, 200.f, 150.f, 50.f, 0.5f, new sf::Color(255, 0, 0), new sf::Color(255, 255, 255), window)};
 
@@ -78,7 +82,7 @@ int main()
     );
     
     character1->SetTagName("player");
-    character1->SetDebug(true);
+    //character1->SetDebug(true);
 
     unsigned int N{10}, M{13};
     Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZEROOM, world)};
@@ -160,7 +164,11 @@ int main()
             {
                 //run
                 character1->GetAnimation(1)->Play(deltaTime);
-                //stepsSfx->play();
+                if(currentStepSFXTime >= stepDelay)
+                {
+                    stepsSfx->play();
+                    currentStepSFXTime = 0.f;
+                }
             }
             else
             {
@@ -191,8 +199,10 @@ int main()
 
         window->display(); //mostrar en pantalla lo que se va dibujar
 
-        sf::Time timeElapsed = clock->getElapsedTime();
+        sf::Time timeElapsed {clock->getElapsedTime()};
         deltaTime = timeElapsed.asMilliseconds();
+        currentStepSFXTime += timeElapsed.asSeconds();
+        //std::cout << "Current step sfx time: " << currentStepSFXTime;
         world->ClearForces();
         world->Step(1.f / 100 * deltaTime, 8, 8);
         clock->restart();

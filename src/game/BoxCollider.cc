@@ -13,6 +13,18 @@ BoxCollider::BoxCollider(float posX, float posY, sf::Color* borderColor, float w
     InitShape();
 }
 
+BoxCollider::BoxCollider(float posX, float posY, sf::Color* borderColor, float width, float height, Rigidbody*& rigidbody)
+{
+    this->posX = posX;
+    this->posY = posY;
+    this->borderColor = borderColor;
+    this->width = width;
+    this->height = height;
+    this->rigidbody = rigidbody;
+
+    InitShape();
+}
+
 BoxCollider::~BoxCollider()
 {
     /*delete borderColor;
@@ -43,8 +55,15 @@ b2Vec2 BoxCollider::GetBodyPosition() const
 
 void BoxCollider::UpdatePhysics()
 {
-    boxShape->setPosition(GetBodyPosition().x, GetBodyPosition().y);
-    parentSprite->setPosition(GetBodyPosition().x, GetBodyPosition().y);
+    if(parentSprite == nullptr)
+    {
+        boxShape->setPosition(GetBodyPosition().x, GetBodyPosition().y);
+    }
+    else
+    {
+        boxShape->setPosition(GetBodyPosition().x, GetBodyPosition().y);
+        parentSprite->setPosition(GetBodyPosition().x, GetBodyPosition().y);
+    }
 }
 
 void BoxCollider::Move(b2Vec2* direction)

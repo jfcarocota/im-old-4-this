@@ -9,6 +9,7 @@
 #include "ContactListener.hh"
 #include "Score.hh"
 #include "GUI/Button.hh"
+#include "HiddenBox.hh"
 
 #include "AssetsPath.hh"
 
@@ -82,7 +83,7 @@ int main()
     );
     
     character1->SetTagName("player");
-    //character1->SetDebug(true);
+    character1->SetDebug(true);
 
     unsigned int N{10}, M{13};
     Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZEROOM, world)};
@@ -100,6 +101,12 @@ int main()
     SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(510, 510), b2BodyType::b2_staticBody, world, window)};
     stairs->SetTagName("stairs");
     //stairs->SetDebug(true);*/
+
+    HiddenBox* boxLeft {new HiddenBox(world, 1, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    HiddenBox* boxRight {new HiddenBox(world, 790, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    std::vector<HiddenBox*>* boxes{new std::vector<HiddenBox*>()};
+    boxes->push_back(boxLeft);
+    boxes->push_back(boxRight);
 
     std::vector<GameObject*>* items{new std::vector<GameObject*>()};
     /*items->push_back(treasure);
@@ -190,6 +197,11 @@ int main()
         {
             item->Update();
         }*/
+
+        for(auto& box : *boxes)
+        {
+            box->Update();
+        }
 
         character1->Update();
 

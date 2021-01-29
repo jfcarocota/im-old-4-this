@@ -6,19 +6,20 @@
 class BoxCollider
 {
     private:
-        sf::RectangleShape* boxShape;
-        float posX;
-        float posY;
-        sf::Color* borderColor;
-        float width;
-        float height;
-        Rigidbody* rigidbody;
-        sf::Sprite* parentSprite;
+        sf::RectangleShape* boxShape{};
+        float posX{};
+        float posY{};
+        sf::Color* borderColor{};
+        float width{};
+        float height{};
+        Rigidbody* rigidbody{};
+        sf::Sprite* parentSprite{};
 
         void InitShape();
         
     public:
         BoxCollider(float, float, sf::Color*, float, float, Rigidbody*&, sf::Sprite*&);
+        BoxCollider(float, float, sf::Color*, float, float, Rigidbody*&);
         ~BoxCollider();
 
         sf::RectangleShape* GetBoxShape() const;

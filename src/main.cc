@@ -10,6 +10,7 @@
 #include "Score.hh"
 #include "GUI/Button.hh"
 #include "HiddenBox.hh"
+#include "GUI/TextBox.hh"
 
 #include "AssetsPath.hh"
 
@@ -133,8 +134,12 @@ int main()
     boxes->push_back(boxRight);
     boxes->push_back(boxBottom);
 
-    GameObject* chair = new GameObject(tilesitems, 16 * 3, 0, 16, 16, SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(100, 100), b2BodyType::b2_staticBody, world, window);
+    TextBox* textBox {new TextBox(20, (WINDOW_HEIGHT / 2) + 150, 500, 100, 5, window, 
+    "Hmm. . .  My urologist said it would stop hurting tomorrow.", FONT2, 24)};
+
+    GameObject* chair {new GameObject(tilesitems, 16 * 3, 0, 16, 16, SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(100, 50), b2BodyType::b2_staticBody, world, window)};
     chair->SetTagName("chair");
+
     std::vector<GameObject*>* items{new std::vector<GameObject*>()};
     items->push_back(chair);
     /*items->push_back(treasure);
@@ -185,6 +190,11 @@ int main()
                 {
                     //run
                     character1->GetAnimation(1)->Play(deltaTime);
+                    if(currentStepSFXTime >= stepDelay)
+                    {
+                        stepsSfx->play();
+                        currentStepSFXTime = 0.f;
+                    }
                 }
                 else
                 {
@@ -249,6 +259,7 @@ int main()
             }
 
             character1->Update();
+            textBox->Update();
 
             //button1->Update();
 

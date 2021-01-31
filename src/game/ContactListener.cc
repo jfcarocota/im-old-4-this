@@ -5,13 +5,12 @@
 #include<cstring>
 #include<algorithm>
 
-
-
-ContactListener::ContactListener(Score*& score, std::vector<GameObject*>*& items)
+ContactListener::ContactListener(Score*& score, std::vector<GameObject*>*& items, TextBox*& textBox)
 {
     sfx = new SFX();
     this->score = score;
     this->items = items;
+    this->textBox = textBox;
 }
 
 ContactListener::~ContactListener()
@@ -38,11 +37,23 @@ void ContactListener::BeginContact(b2Contact* contact)
             bodyDataB->~GameObject();
             sfx->PlaySFX(0);
         }
-        if(std::strcmp(bodyDataA->GetTagName(), "player") == 0 && std::strcmp(bodyDataB->GetTagName(), "stairs") == 0)
+        /*if(std::strcmp(bodyDataA->GetTagName(), "player") == 0 && std::strcmp(bodyDataB->GetTagName(), "stairs") == 0)
         {
             std::cout << "stairs" << std::endl;
             bodyDataB->~GameObject();
             sceneIndex++;
+        }*/
+
+        if(std::strcmp(bodyDataA->GetTagName(), "player") == 0 && std::strcmp(bodyDataB->GetTagName(), "chair") == 0)
+        {
+            std::cout << "chair" << std::endl;
+            textBox->Show("You have decided to sit in the chair");
+        }
+
+        if(std::strcmp(bodyDataA->GetTagName(), "player") == 0 && std::strcmp(bodyDataB->GetTagName(), "pc") == 0)
+        {
+            std::cout << "chair" << std::endl;
+            textBox->Show("This brings me good memories");
         }
     }
 }

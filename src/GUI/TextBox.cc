@@ -1,7 +1,7 @@
 #include "GUI/TextBox.hh"
 
 TextBox::TextBox(float posX, float posY, float width, float height, float borderSize, 
-sf::RenderWindow*& window, std::string label, const char* fontUrl, unsigned int fontSize)
+sf::RenderWindow*& window, const char* fontUrl, unsigned int fontSize, float alive)
 {
     
     this->posX = posX;
@@ -12,18 +12,19 @@ sf::RenderWindow*& window, std::string label, const char* fontUrl, unsigned int 
     this->fillColor = new sf::Color(0, 0, 0, 180);
     this->borderColor = new sf::Color(0, 0, 0, 255);
     this->window = window;
+    this->alive = alive;
+    currentTime = alive;
     //this->label = label;
 
     font->loadFromFile(fontUrl);
     text->setFont(*font);
-    text->setString(label);
     text->setCharacterSize(fontSize);
     text->setFillColor(sf::Color::White);
     text->setPosition(posX + 5, posY + 5);
 
     rectangleShape = new sf::RectangleShape();
     rectangleShape->setPosition(*(new sf::Vector2f(posX, posY)));
-    rectangleShape->setSize(*(new sf::Vector2f(width + std::abs(width - text->getLocalBounds().width) + 10, height)));
+    rectangleShape->setSize(*(new sf::Vector2f(width, height)));
     rectangleShape->setFillColor(*fillColor);
     rectangleShape->setOutlineColor(*borderColor);
     rectangleShape->setOutlineThickness(borderSize);
@@ -34,8 +35,19 @@ TextBox::~TextBox()
 
 }
 
-void TextBox::Update()
+void TextBox::Update(float deltaTime)
 {
-    window->draw(*rectangleShape);
-    window->draw(*text);
+    if(currentTime < alive)
+    {
+        currentTime += deltaTime;
+        window->draw(*rectangleShape);
+        window->draw(*text);
+    }
 }
+
+void TextBox::Show(std::string label)
+{
+    text->setString(label);
+    currentTime = 0;
+}
+

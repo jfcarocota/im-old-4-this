@@ -13,9 +13,12 @@ private:
     sf::RenderWindow* window;
     sf::Font* font{new sf::Font()};
     sf::Text* text{new sf::Text()};
+    float alive{};
+    float currentTime{};
 public:
     TextBox(float posX, float posY, float width, float height, float borderSize, 
-    sf::RenderWindow*& window, std::string label, const char* fontUrl, unsigned int fontSize);
+    sf::RenderWindow*& window, const char* fontUrl, unsigned int fontSize, float alive);
     ~TextBox();
-    void Update();
+    void Update(float deltaTime);
+    void Show(std::string label);
 };

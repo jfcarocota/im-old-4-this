@@ -14,6 +14,8 @@
 
 #include "AssetsPath.hh"
 
+GameState gameState{GAME};
+
 int main()
 {
 
@@ -113,18 +115,6 @@ int main()
     Maze* maze2{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZE2, world)};
     Maze*& currentMaze{*&maze1};
 
-   /* GameObject* treasure{new GameObject(tilesTexture3, 16 * 19, 16 * 19, 16, 16, 
-    SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(400, 400), b2BodyType::b2_staticBody, world, window)}; 
-    treasure->SetTagName("item");
-    GameObject* treasure2{new GameObject(tilesTexture3, 16 * 19, 16 * 19, 16, 16, 
-    SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(200, 400), b2BodyType::b2_staticBody, world, window)}; 
-    treasure2->SetTagName("item");
-
-    GameObject* stairs{new GameObject(tilesTexture3, 16 * 3, 16 * 6, 16, 16, 
-    SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(510, 510), b2BodyType::b2_staticBody, world, window)};
-    stairs->SetTagName("stairs");
-    //stairs->SetDebug(true);*/
-
     HiddenBox* boxLeft {new HiddenBox(world, 0, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
     //boxLeft->SetDebugMode(true);
     HiddenBox* boxRight {new HiddenBox(world, 750, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
@@ -134,19 +124,21 @@ int main()
     boxes->push_back(boxRight);
     boxes->push_back(boxBottom);
 
-    TextBox* textBox {new TextBox(20, (WINDOW_HEIGHT / 2) + 150, 500, 100, 5, window, 
-    "Hmm. . .  My urologist said it would stop hurting tomorrow.", FONT2, 24)};
+    TextBox* textBox {new TextBox(20, (WINDOW_HEIGHT / 2) + 150, 500, 100, 5, window, FONT2, 24, 3000)};
 
     GameObject* chair {new GameObject(tilesitems, 16 * 3, 0, 16, 16, SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(100, 50), b2BodyType::b2_staticBody, world, window)};
     chair->SetTagName("chair");
+    GameObject* pc {new GameObject(tilesitems, 16 * 1, 0, 16, 16, SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(500, 50), b2BodyType::b2_staticBody, world, window)};
+    pc->SetTagName("pc");
 
     std::vector<GameObject*>* items{new std::vector<GameObject*>()};
     items->push_back(chair);
+    items->push_back(pc);
     /*items->push_back(treasure);
     items->push_back(treasure2);
     items->push_back(stairs);*/
 
-    ContactListener* conctactListener{new ContactListener(score, items)};
+    ContactListener* conctactListener{new ContactListener(score, items, textBox)};
 
     world->SetContactListener(conctactListener);
 
@@ -183,6 +175,11 @@ int main()
         {
             if(sf::Joystick::isConnected(0))
             {
+                if(!joystickJokes)
+                {
+                    joystickJokes = true;
+                    textBox->Show("Hmm. . .  My urologist said it would stop hurting tomorrow.");
+                }
                 character1->Move(new b2Vec2(joystickAxis->x * deltaTime * PLAYER_MOVESPEED, joystickAxis->y * deltaTime * PLAYER_MOVESPEED));
                 character1->FlipSpriteX(joystickAxis->x);
 
@@ -259,7 +256,7 @@ int main()
             }
 
             character1->Update();
-            textBox->Update();
+            textBox->Update(deltaTime);
 
             //button1->Update();
 

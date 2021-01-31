@@ -19,4 +19,4 @@ enum GameState
     GAME,
     GAMEOVER,
     END
-}gameState;
+};

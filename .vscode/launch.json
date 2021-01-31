@@ -8,7 +8,7 @@
             "name": "(gdb) Iniciar",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/game1",
+            "program": "${workspaceFolder}/bin/Im_old_4_this.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

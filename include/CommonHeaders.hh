@@ -12,3 +12,11 @@
 #define SPRITE_SCALE 4.f
 #define FPS 120
 #define PLAYER_MOVESPEED 3.0f
+
+enum GameState 
+{
+    MENU,
+    GAME,
+    GAMEOVER,
+    END
+}gameState;

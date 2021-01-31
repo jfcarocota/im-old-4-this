@@ -10,10 +10,14 @@ class Button
         sf::Color* fillColor;
         sf::Color* borderColor;
         sf::RenderWindow* window;
+        sf::Font* font{new sf::Font()};
+        sf::Text* text{new sf::Text()};
+        //std::string label{};
     public:
         void Init();
         void Update();
         void OnClick();
         Button(float, float, float, float, float, sf::Color*, sf::Color*, sf::RenderWindow*&);
+        Button(float, float, float, float, float, sf::Color*, sf::Color*, sf::RenderWindow*&, std::string, const char*, unsigned int);
         ~Button();
 };

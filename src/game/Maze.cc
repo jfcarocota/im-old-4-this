@@ -64,6 +64,24 @@ void Maze::Generate()
                 case 'f':
                     container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
                     break;
+                case 'u':
+                    container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
+                    break;
+                case 'i':
+                    container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
+                    break;
+                case 'o':
+                    container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
+                    break;
+                case 'j':
+                    container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
+                    break;
+                case 'k':
+                    container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
+                    break;
+                case 'l':
+                    container->push_back(new Tile(cropSize * 0, cropSize * 1, scale, cropSize, texture));
+                    break;
                 /*case 'v':
                     container->push_back(new Tile(cropSize * 3, cropSize * 6, scale, cropSize, texture, world));
                     container->back()->TurnPhysicsOn(cropSize * scale * j, cropSize * scale * i);

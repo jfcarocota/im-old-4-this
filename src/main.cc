@@ -15,8 +15,11 @@
 
 int main()
 {
+
+    gameState = MENU;
+
     //esto es la ventana de tu grafico
-    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32), GAME_NAME);
+    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32), GAME_NAME, sf::Style::Titlebar | sf::Style::Close);
     sf::Image* iconTexture{new sf::Image()};
     iconTexture->loadFromFile(ICON);
     window->setIcon(32, 32, iconTexture->getPixelsPtr());
@@ -37,7 +40,8 @@ int main()
     float stepDelay{0.3f};
     float currentStepSFXTime {stepDelay};
 
-    Button* button1{new Button(200.f, 200.f, 150.f, 50.f, 0.5f, new sf::Color(255, 0, 0), new sf::Color(255, 255, 255), window)};
+    Button* button1{new Button((WINDOW_WIDTH / 2) - 75, (WINDOW_HEIGHT / 2)  + 100, 150.f, 50.f, 0.5f, 
+    new sf::Color(255, 255, 255), new sf::Color(255, 255, 255), window, "Start", FONT1, 35)};
 
     //aqui vas a guardar los eventos dentro de la ventana, eje: teclado, mouse, etc.
     sf::Event event;
@@ -55,6 +59,11 @@ int main()
     window->setFramerateLimit(FPS);
     //Game inputs
     Inputs* inputs{new Inputs()};
+
+    //Menu Texture
+    sf::Texture* bannerTexture{new sf::Texture()};
+    bannerTexture->loadFromFile(BANNER);
+
     //Textures
     sf::Texture* texturePlayer{new sf::Texture()};
     texturePlayer->loadFromFile(SS_OLDGUY);
@@ -70,6 +79,7 @@ int main()
     const float tileBaseWidth{16 * SPRITE_SCALE};
     const float tileBaseHeight{16 * SPRITE_SCALE};
 
+    sf::Sprite* bannerSprite{new sf::Sprite(*bannerTexture, *(new sf::IntRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)))};
 
     //Main player
     Character* character1{new Character(texturePlayer, 0 * 1, 0 * 1, 78 / 6, 27 / 2, 
@@ -149,74 +159,91 @@ int main()
         Vec2* keyboardAxis{inputs->GetKeyboardAxis()};
         Vec2* joystickAxis{inputs->GetJoystickAxis()};
 
-        if(sf::Joystick::isConnected(0))
+        if(gameState == GAME)
         {
-            character1->Move(new b2Vec2(joystickAxis->x * deltaTime * PLAYER_MOVESPEED, joystickAxis->y * deltaTime * PLAYER_MOVESPEED));
-            character1->FlipSpriteX(joystickAxis->x);
+            if(sf::Joystick::isConnected(0))
+            {
+                character1->Move(new b2Vec2(joystickAxis->x * deltaTime * PLAYER_MOVESPEED, joystickAxis->y * deltaTime * PLAYER_MOVESPEED));
+                character1->FlipSpriteX(joystickAxis->x);
 
-            if(std::abs(joystickAxis->x) > 0 || std::abs(joystickAxis->y) > 0)
-            {
-                //run
-                character1->GetAnimation(1)->Play(deltaTime);
-            }
-            else
-            {
-                //idle
-                character1->GetAnimation(0)->Play(deltaTime);
-            }
-        }
-        else
-        {
-            character1->Move(new b2Vec2(keyboardAxis->x * deltaTime * PLAYER_MOVESPEED, keyboardAxis->y * deltaTime * PLAYER_MOVESPEED));
-            character1->FlipSpriteX(keyboardAxis->x);
-
-            if(std::abs(keyboardAxis->x) > 0 || std::abs(keyboardAxis->y) > 0)
-            {
-                //run
-                character1->GetAnimation(1)->Play(deltaTime);
-                if(currentStepSFXTime >= stepDelay)
+                if(std::abs(joystickAxis->x) > 0 || std::abs(joystickAxis->y) > 0)
                 {
-                    stepsSfx->play();
-                    currentStepSFXTime = 0.f;
+                    //run
+                    character1->GetAnimation(1)->Play(deltaTime);
+                }
+                else
+                {
+                    //idle
+                    character1->GetAnimation(0)->Play(deltaTime);
                 }
             }
             else
             {
-                //idle
-                character1->GetAnimation(0)->Play(deltaTime);
+                character1->Move(new b2Vec2(keyboardAxis->x * deltaTime * PLAYER_MOVESPEED, keyboardAxis->y * deltaTime * PLAYER_MOVESPEED));
+                character1->FlipSpriteX(keyboardAxis->x);
+
+                if(std::abs(keyboardAxis->x) > 0 || std::abs(keyboardAxis->y) > 0)
+                {
+                    //run
+                    character1->GetAnimation(1)->Play(deltaTime);
+                    if(currentStepSFXTime >= stepDelay)
+                    {
+                        stepsSfx->play();
+                        currentStepSFXTime = 0.f;
+                    }
+                }
+                else
+                {
+                    //idle
+                    character1->GetAnimation(0)->Play(deltaTime);
+                }
             }
         }
 
         window->clear(*(new sf::Color(150, 100, 0, 255)));//limpiar la pantalla
 
-        for(auto& mazeTile : *currentMaze->GetContainer())
+        if(gameState == MENU)
         {
-            window->draw(*mazeTile->GetSprite());
+            window->draw(*bannerSprite);
+            button1->Update();
         }
 
-        //stairs->Update();
-        
-        /*for(auto& item : *items)
+        if(gameState == GAME)
         {
-            item->Update();
-        }*/
+            for(auto& mazeTile : *currentMaze->GetContainer())
+            {
+                window->draw(*mazeTile->GetSprite());
+            }
 
-        for(auto& box : *boxes)
-        {
-            box->Update();
+            //stairs->Update();
+            
+            /*for(auto& item : *items)
+            {
+                item->Update();
+            }*/
+
+            for(auto& box : *boxes)
+            {
+                box->Update();
+            }
+
+            character1->Update();
+
+            //button1->Update();
+
+            //score->Update();
         }
-
-        character1->Update();
-
-        //button1->Update();
-
-        //score->Update();
 
         window->display(); //mostrar en pantalla lo que se va dibujar
 
         sf::Time timeElapsed {clock->getElapsedTime()};
         deltaTime = timeElapsed.asMilliseconds();
-        currentStepSFXTime += timeElapsed.asSeconds();
+
+        if(gameState == GAME)
+        {
+            currentStepSFXTime += timeElapsed.asSeconds();
+        }
+        
         //std::cout << "Current step sfx time: " << currentStepSFXTime;
         world->ClearForces();
         world->Step(1.f / 100 * deltaTime, 8, 8);

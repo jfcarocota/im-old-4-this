@@ -7,6 +7,8 @@
 			"command": "g++",
 			"args": [
 				"-std=c++17",
+				"-static-libgcc",
+				"-static-libstdc++",
 				"-Iinclude",
 				"-Isrc/dynamics",
 				"src/*.cc",
@@ -17,7 +19,7 @@
 				"src/rope/*.cpp",
 				"src/GUI/*.cc",
 				"-o",
-				"bin/game1.exe",
+				"bin/Im_old_4_this.exe",
 				"lib/libopenal32.a",
 				"lib/libsfml-audio.a",
 				"lib/libsfml-graphics.a",

@@ -49,17 +49,11 @@ Button::~Button()
 {
 }
 
-void Button::OnClick()
+bool Button::OnClick()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);//captura si estamos en el area de la venta de nuestor juego
     sf::Vector2f mouseTranslate = window->mapPixelToCoords(mousePos); // este captura cuanto se ha movido el mouse dentro de la ventana
-    if(rectangleShape->getGlobalBounds().contains(mouseTranslate)) // si esa traslación fue sobre la forma de nuestro rectangulo
-    {
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-        {
-            std::cout << "click" << std::endl;
-        }
-    }
+    return rectangleShape->getGlobalBounds().contains(mouseTranslate) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
 }
 
 void Button::Update()

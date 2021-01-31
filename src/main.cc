@@ -40,7 +40,14 @@ int main()
     float stepDelay{0.3f};
     float currentStepSFXTime {stepDelay};
 
-    Button* button1{new Button((WINDOW_WIDTH / 2) - 75, (WINDOW_HEIGHT / 2)  + 100, 150.f, 50.f, 0.5f, 
+    //sfx click
+    sf::SoundBuffer* clickSFXBuffer{new sf::SoundBuffer()};
+    sf::Sound* clickSfx{new sf::Sound()};
+    clickSFXBuffer->loadFromFile(CLICK_SFX);
+    clickSfx->setBuffer(*clickSFXBuffer);
+    clickSfx->setVolume(4.f);
+
+    Button* btnStart{new Button((WINDOW_WIDTH / 2) - 75, (WINDOW_HEIGHT / 2)  + 100, 150.f, 50.f, 0.5f, 
     new sf::Color(255, 255, 255), new sf::Color(255, 255, 255), window, "Start", FONT1, 35)};
 
     //aqui vas a guardar los eventos dentro de la ventana, eje: teclado, mouse, etc.
@@ -205,7 +212,13 @@ int main()
         if(gameState == MENU)
         {
             window->draw(*bannerSprite);
-            button1->Update();
+            btnStart->Update();
+            if(btnStart->OnClick())
+            {
+                //click sfx
+                clickSfx->play();
+                gameState = GAME;
+            }
         }
 
         if(gameState == GAME)

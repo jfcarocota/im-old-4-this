@@ -16,7 +16,7 @@ class Button
     public:
         void Init();
         void Update();
-        void OnClick();
+        bool OnClick();
         Button(float, float, float, float, float, sf::Color*, sf::Color*, sf::RenderWindow*&);
         Button(float, float, float, float, float, sf::Color*, sf::Color*, sf::RenderWindow*&, std::string, const char*, unsigned int);
         ~Button();

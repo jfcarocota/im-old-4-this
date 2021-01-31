@@ -18,6 +18,9 @@ int main()
 
     gameState = MENU;
 
+    bool hasKey{};
+    bool joystickJokes;
+
     //esto es la ventana de tu grafico
     sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32), GAME_NAME, sf::Style::Titlebar | sf::Style::Close);
     sf::Image* iconTexture{new sf::Image()};
@@ -82,6 +85,8 @@ int main()
     tilesTexture3->loadFromFile(TILES3);
     sf::Texture* tilesTextureMain{new sf::Texture()};
     tilesTextureMain->loadFromFile(MAIN_TILES);
+    sf::Texture* tilesitems{new sf::Texture()};
+    tilesitems->loadFromFile(ITEMS);
 
     const float tileBaseWidth{16 * SPRITE_SCALE};
     const float tileBaseHeight{16 * SPRITE_SCALE};
@@ -128,7 +133,10 @@ int main()
     boxes->push_back(boxRight);
     boxes->push_back(boxBottom);
 
+    GameObject* chair = new GameObject(tilesitems, 16 * 3, 0, 16, 16, SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(100, 100), b2BodyType::b2_staticBody, world, window);
+    chair->SetTagName("chair");
     std::vector<GameObject*>* items{new std::vector<GameObject*>()};
+    items->push_back(chair);
     /*items->push_back(treasure);
     items->push_back(treasure2);
     items->push_back(stairs);*/
@@ -230,10 +238,10 @@ int main()
 
             //stairs->Update();
             
-            /*for(auto& item : *items)
+            for(auto& item : *items)
             {
                 item->Update();
-            }*/
+            }
 
             for(auto& box : *boxes)
             {

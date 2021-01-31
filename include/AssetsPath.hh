@@ -3,6 +3,7 @@
 #define TILES1 "assets/sprites/tiles1.png"
 #define TILES2 "assets/sprites/tiles2.png"
 #define TILES3 "assets/sprites/tiles3.png"
+#define ITEMS "assets/sprites/oldguyItems.png"
 #define BANNER "assets/sprites/imold4thisbanner.png"
 #define MAIN_TILES "assets/sprites/carpet.png"
 #define SS_OLDGUY "assets/sprites/spOldGuy.png"

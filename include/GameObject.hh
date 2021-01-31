@@ -26,7 +26,8 @@ class GameObject
 
         void InitSprite(b2World*&, b2Vec2*, b2BodyType);
     public:
-        GameObject(sf::Texture*&, float, float, float, float, float, float, b2Vec2*, b2BodyType, b2World*&, sf::RenderWindow*&);
+        GameObject(sf::Texture*& texture, float cropPosX, float cropPosY, float cropWidth, 
+        float cropHeight, float scaleX, float scaleY, b2Vec2* position, b2BodyType bodyType,b2World*& world, sf::RenderWindow*& window);
         ~GameObject();
         sf::Sprite* GetSprite();
          BoxCollider* GetCollider() const;

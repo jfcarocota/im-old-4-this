@@ -9,7 +9,7 @@
 #define SS_OLDGUY "assets/sprites/spOldGuy.png"
 #define FONT1 "assets/fonts/8-bit Arcade In.ttf"
 #define FONT2 "assets/fonts/Arial_GEO.ttf"
-#define ICON "assets/swordIcon.png"
+#define ICON "assets/oldguyIcon.png"
 #define BG_MUSIC "assets/audio/oldguy.ogg"
 #define CLICK_SFX "assets/audio/click.ogg"
 #define STEPS_SFX "assets/audio/stepsfx.ogg"

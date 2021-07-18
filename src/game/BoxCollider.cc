@@ -31,6 +31,7 @@ BoxCollider::~BoxCollider()
     delete boxShape;
     rigidbody->~Rigidbody();
     delete this;*/
+    //delete this;
     rigidbody->~Rigidbody();
 }
 

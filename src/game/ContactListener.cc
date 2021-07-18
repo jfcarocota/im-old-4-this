@@ -5,11 +5,12 @@
 #include<cstring>
 #include<algorithm>
 
-ContactListener::ContactListener(Score*& score, std::vector<GameObject*>*& items, TextBox*& textBox)
+ContactListener::ContactListener(Score*& score, std::vector<GameObject*>*& items, std::vector<GameObject*>*& go4Delete,TextBox*& textBox)
 {
     sfx = new SFX();
     this->score = score;
     this->items = items;
+    this->go4Delete = go4Delete;
     this->textBox = textBox;
 }
 
@@ -31,10 +32,17 @@ void ContactListener::BeginContact(b2Contact* contact)
     {
         if(std::strcmp(bodyDataA->GetTagName(), "player") == 0 && std::strcmp(bodyDataB->GetTagName(), "item") == 0)
         {
-            std::cout << "collected" << std::endl;
-            score->AddPoints(5);
+            //std::cout << "collected" << std::endl;
+            //score->AddPoints(5);
             items->erase(std::remove(items->begin(), items->end(), bodyDataB), items->end());
             bodyDataB->~GameObject();
+            sfx->PlaySFX(0);
+        }
+        if(std::strcmp(bodyDataA->GetTagName(), "player") == 0 && std::strcmp(bodyDataB->GetTagName(), "keyChest") == 0)
+        {
+            //items->erase(std::remove(items->begin(), items->end(), bodyDataB), items->end());
+            //bodyDataB->~GameObject();
+            go4Delete->push_back(bodyDataB);
             sfx->PlaySFX(0);
         }
         /*if(std::strcmp(bodyDataA->GetTagName(), "player") == 0 && std::strcmp(bodyDataB->GetTagName(), "stairs") == 0)

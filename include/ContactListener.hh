@@ -12,11 +12,12 @@ class ContactListener : public b2ContactListener
     private:
         Score* score;
         std::vector<GameObject*>* items;
+        std::vector<GameObject*>* go4Delete;
         int sceneIndex{};
         SFX* sfx;
         TextBox* textBox{};
     public:
-        ContactListener(Score*&, std::vector<GameObject*>*&, TextBox*& textBox);
+        ContactListener(Score*& score, std::vector<GameObject*>*& items, std::vector<GameObject*>*& go4Delete,TextBox*& textBox);
         ~ContactListener();
         
         void BeginContact(b2Contact*);

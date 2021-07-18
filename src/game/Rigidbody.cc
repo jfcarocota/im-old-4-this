@@ -11,13 +11,13 @@ float boxWidth, float boxHeight, float density, float friction, float restitutio
 
     body = world->CreateBody(bodyDef);
     polygonShape = new b2PolygonShape();
-    polygonShape->SetAsBox(boxWidth, boxHeight); 
+    polygonShape->SetAsBox(boxWidth, boxHeight);
 
     fixtureDef = new b2FixtureDef();
     fixtureDef->shape = polygonShape;
-    fixtureDef->density = density; 
+    fixtureDef->density = density;
     fixtureDef->friction = friction;
-    fixtureDef->restitution = restitution; 
+    fixtureDef->restitution = restitution;
 
     fixture = body->CreateFixture(fixtureDef);
 }
@@ -25,11 +25,12 @@ float boxWidth, float boxHeight, float density, float friction, float restitutio
 Rigidbody::~Rigidbody()
 {
     //delete fixture;
-    //world->DestroyBody(body);
+    world->DestroyBody(body);
+    //delete this;
 
-    fixture->SetSensor(true);
-    body->SetUserData(nullptr);
-    
+    //fixture->SetSensor(true);
+    //body->SetUserData(nullptr);
+
     //std::cout << "delete body" << std::endl;
     /*body->DestroyFixture(fixture);
     body->SetUserData(nullptr);

@@ -14,19 +14,13 @@
 				"src/*.cc",
 				"src/game/*.cc",
 				"src/collision/*.cpp",
-                "src/common/*.cpp",
-                "src/dynamics/*.cpp",
+				"src/common/*.cpp",
+				"src/dynamics/*.cpp",
 				"src/rope/*.cpp",
 				"src/GUI/*.cc",
 				"-o",
 				"bin/Im_old_4_this.exe",
-				"lib/libopenal32.a",
-				"lib/libsfml-audio.a",
-				"lib/libsfml-graphics.a",
-				"lib/libsfml-window.a",
-				"lib/libsfml-system.a",
-				"lib/libsfml-main.a",
-				"lib/libsfml-network.a"
+				"lib/*.a",
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

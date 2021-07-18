@@ -27,12 +27,7 @@ BoxCollider::BoxCollider(float posX, float posY, sf::Color* borderColor, float w
 
 BoxCollider::~BoxCollider()
 {
-    /*delete borderColor;
-    delete boxShape;
-    rigidbody->~Rigidbody();
-    delete this;*/
-    //delete this;
-    rigidbody->~Rigidbody();
+    delete rigidbody;
 }
 
 void BoxCollider::InitShape()

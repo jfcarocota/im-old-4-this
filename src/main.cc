@@ -259,7 +259,8 @@ int main()
             for(auto& gameobject: *gameobjects4delete)
             {
                 items->erase(std::remove(items->begin(), items->end(), gameobject), items->end());
-                gameobject->~GameObject();
+                //gameobject->~GameObject();
+                delete gameobject;
             }
             gameobjects4delete->clear();
 

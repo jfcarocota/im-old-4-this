@@ -4,7 +4,8 @@ Character::Character(sf::Texture*& texture, float cropPosX, float cropPosY, floa
 float cropHeight, float scaleX, float scaleY, b2Vec2* position, b2BodyType bodyType, b2World*& world, sf::RenderWindow*& window) : 
 GameObject(texture, cropPosX, cropPosY, cropWidth, cropHeight, scaleX, scaleY, position, bodyType, world, window)
 {
-    
+    sprite->setOrigin(sprite->getLocalBounds().width / 2, 0.f);
+    boxCollider->GetBoxShape()->setOrigin(sprite->getOrigin());
 }
 
 void Character::Move(b2Vec2* direction)
@@ -14,16 +15,7 @@ void Character::Move(b2Vec2* direction)
 
 void Character::FlipSpriteX(float x)
 {
-    if( x > 0)
-    {
-        sprite->setScale(scaleX, scaleY);
-        sprite->setOrigin(0.f, 0.f);
-    }
-    if (x < 0)
-    {
-        sprite->setScale(-scaleX, scaleY);
-        sprite->setOrigin(sprite->getGlobalBounds().width / scaleX, 0.f);
-    }
+    sprite->setScale( x > 0 ? scaleX : x < 0 ? -scaleX : sprite->getScale().x, scaleY);
 }
 
 void Character::SetAnimations(Animation** animations)

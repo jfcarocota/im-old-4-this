@@ -25,7 +25,7 @@ int main()
     bool joystickJokes;
 
     //esto es la ventana de tu grafico
-    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32), GAME_NAME, sf::Style::Titlebar | sf::Style::Close);
+    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32), GAME_NAME, sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
     sf::Image* iconTexture{new sf::Image()};
     iconTexture->loadFromFile(ICON);
     window->setIcon(32, 32, iconTexture->getPixelsPtr());
@@ -96,7 +96,7 @@ int main()
     sf::Sprite* bannerSprite{new sf::Sprite(*bannerTexture, *(new sf::IntRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)))};
 
     //Main player
-    Character* character1{new Character(texturePlayer, 0 * 1, 0 * 1, 78 / 6, 27 / 2, 
+    Character* character1{new Character(texturePlayer, 0 * 1, 0 * 1, 78 / 6, 27 / 2,
     SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(400, 300), b2BodyType::b2_dynamicBody, world, window)};
     character1->SetAnimations(
         new Animation*[2]
@@ -115,9 +115,11 @@ int main()
     Maze*& currentMaze{*&maze1};
 
     HiddenBox* boxLeft {new HiddenBox(world, 0, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
-    //boxLeft->SetDebugMode(true);
+    boxLeft->SetDebugMode(true);
     HiddenBox* boxRight {new HiddenBox(world, 750, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    boxRight->SetDebugMode(true);
     HiddenBox* boxBottom {new HiddenBox(world, 0, WINDOW_HEIGHT - 40, WINDOW_WIDTH, 1, SPRITE_SCALE, window)};
+    boxBottom->SetDebugMode(true);
     std::vector<HiddenBox*>* boxes{new std::vector<HiddenBox*>()};
     boxes->push_back(boxLeft);
     boxes->push_back(boxRight);

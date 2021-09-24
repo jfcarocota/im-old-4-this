@@ -1,7 +1,7 @@
 #include "Rigidbody.hh"
 
 #include<iostream>
-Rigidbody::Rigidbody(b2World*& world, b2BodyType bodyType, b2Vec2* position, 
+Rigidbody::Rigidbody(b2World*& world, b2BodyType bodyType, b2Vec2* position,
 float boxWidth, float boxHeight, float density, float friction, float restitution)
 {
     this->world = world;

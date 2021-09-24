@@ -7,8 +7,8 @@
 			"command": "g++",
 			"args": [
 				"-std=c++17",
-				"-static-libgcc",
-				"-static-libstdc++",
+				//"-static-libgcc",
+				//"-static-libstdc++",
 				"-Iinclude",
 				"-Isrc/dynamics",
 				"src/*.cc",
@@ -20,6 +20,7 @@
 				"src/GUI/*.cc",
 				"-o",
 				"bin/Im_old_4_this.exe",
+				//"-Llib"
 				"lib/*.a",
 			],
 			"options": {

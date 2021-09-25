@@ -2,7 +2,7 @@
 
 #include<iostream>
 Rigidbody::Rigidbody(b2World*& world, b2BodyType bodyType, b2Vec2* position,
-float boxWidth, float boxHeight, float density, float friction, float restitution)
+float boxWidth, float boxHeight, float density, float friction, float restitution, b2Vec2* origin, float angle)
 {
     this->world = world;
     bodyDef = new b2BodyDef();
@@ -11,7 +11,7 @@ float boxWidth, float boxHeight, float density, float friction, float restitutio
 
     body = world->CreateBody(bodyDef);
     polygonShape = new b2PolygonShape();
-    polygonShape->SetAsBox(boxWidth, boxHeight);
+    polygonShape->SetAsBox(boxWidth, boxHeight, *origin, angle);
 
     fixtureDef = new b2FixtureDef();
     fixtureDef->shape = polygonShape;

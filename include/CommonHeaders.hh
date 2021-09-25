@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include<box2d/box2d.h>
+#include "DrawPhysics.hh"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600

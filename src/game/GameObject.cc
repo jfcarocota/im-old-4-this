@@ -29,7 +29,7 @@ void GameObject::InitSprite(b2World*& world, b2Vec2* position, b2BodyType bodyTy
     sprite = new sf::Sprite(*texture, *(new sf::IntRect(cropPosX, cropPosY, cropWidth, cropHeight)));
     sprite->setScale(*(new sf::Vector2f(scaleX, scaleY)));
 
-    Rigidbody* rb{new Rigidbody(world, bodyType, position, tileBaseWidth / 2, tileBaseHeight / 2, 1, 0, 0)};
+    Rigidbody* rb{new Rigidbody(world, bodyType, position, tileBaseWidth / 2, tileBaseHeight / 2, 1, 0, 0, new b2Vec2(sprite->getOrigin().x, sprite->getOrigin().y), 0.f)};
     rb->SetUserData((void*) this);
     boxCollider = new BoxCollider(position->x, position->y, new sf::Color(0, 255, 0, 255), cropWidth, cropHeight, rb, sprite);
     boxCollider->GetBoxShape()->setScale(scaleX, scaleY);

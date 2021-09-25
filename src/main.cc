@@ -61,9 +61,20 @@ int main()
 
     Score* score{new Score(FONT1, "Score ", 24, new sf::Vector2f(25, 5), new sf::Color(255, 255, 255), window)};
 
+    b2Draw* drawPhysics{new DrawPhysics(window)};
+    uint32 flags{};
+    //flags += b2Draw::e_aabbBit;
+    //flags += b2Draw::e_shapeBit;
+    //flags += b2Draw::e_centerOfMassBit;
+    //flags += b2Draw::e_pairBit;
+    //flags += b2Draw::e_jointBit;
+
     //physics declaration
     b2Vec2* gravity{new b2Vec2(0.f, 0.f)};
     b2World* world{new b2World(*gravity)};
+
+    world->SetDebugDraw(drawPhysics);
+    drawPhysics->SetFlags(b2Draw::e_shapeBit);
 
     sf::Clock* clock{new sf::Clock()};
     float deltaTime{};
@@ -107,35 +118,35 @@ int main()
     );
 
     character1->SetTagName("player");
-    character1->SetDebug(true);
+    //character1->SetDebug(true);
 
     unsigned int N{10}, M{13};
     Maze* maze1{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZEROOM, world)};
     Maze* maze2{new Maze(N, M, SPRITE_SCALE, 16, tilesTextureMain, MAZE2, world)};
     Maze*& currentMaze{*&maze1};
 
-    HiddenBox* boxLeft {new HiddenBox(world, 0, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
-    boxLeft->SetDebugMode(true);
+   /* HiddenBox* boxLeft {new HiddenBox(world, 0, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
+    //boxLeft->SetDebugMode(true);
     HiddenBox* boxRight {new HiddenBox(world, 750, 0, 1, WINDOW_HEIGHT, SPRITE_SCALE, window)};
-    boxRight->SetDebugMode(true);
+    //boxRight->SetDebugMode(true);
     HiddenBox* boxBottom {new HiddenBox(world, 0, WINDOW_HEIGHT - 40, WINDOW_WIDTH, 1, SPRITE_SCALE, window)};
-    boxBottom->SetDebugMode(true);
+    //boxBottom->SetDebugMode(true);
     std::vector<HiddenBox*>* boxes{new std::vector<HiddenBox*>()};
     boxes->push_back(boxLeft);
     boxes->push_back(boxRight);
-    boxes->push_back(boxBottom);
+    boxes->push_back(boxBottom);*/
 
     TextBox* textBox {new TextBox(20, (WINDOW_HEIGHT / 2) + 150, 500, 100, 5, window, FONT2, 24, 3000)};
 
     GameObject* keyChest {new GameObject(tilesitems, 0, 0, 16, 16, SPRITE_SCALE / 2, SPRITE_SCALE / 2, new b2Vec2(200, 300), b2BodyType::b2_staticBody, world, window)};
     keyChest->SetTagName("keyChest");
-    keyChest->SetDebug(true);
+    //keyChest->SetDebug(true);
     GameObject* chair {new GameObject(tilesitems, 16 * 3, 0, 16, 16, SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(100, 50), b2BodyType::b2_staticBody, world, window)};
     chair->SetTagName("chair");
-    chair->SetDebug(true);
+    //chair->SetDebug(true);
     GameObject* pc {new GameObject(tilesitems, 16 * 1, 0, 16, 16, SPRITE_SCALE, SPRITE_SCALE, new b2Vec2(500, 50), b2BodyType::b2_staticBody, world, window)};
     pc->SetTagName("pc");
-    pc->SetDebug(true);
+    //pc->SetDebug(true);
 
     //Eliminar bodies de box 2d etc.
     std::vector<GameObject*>* gameobjects4delete{new std::vector<GameObject*>()};
@@ -266,13 +277,14 @@ int main()
             }
             gameobjects4delete->clear();
 
-            for(auto& box : *boxes)
+            /*for(auto& box : *boxes)
             {
                 box->Update();
-            }
+            }*/
 
             character1->Update();
             textBox->Update(deltaTime);
+            world->DebugDraw();
 
             //button1->Update();
 

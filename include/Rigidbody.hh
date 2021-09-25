@@ -16,4 +16,5 @@ class Rigidbody
         b2Body* GetBody() const;
         void SetUserData(void*);
         void SetSensor(bool);
+        void FrezzeRotation();
 };

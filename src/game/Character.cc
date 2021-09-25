@@ -4,8 +4,9 @@ Character::Character(sf::Texture*& texture, float cropPosX, float cropPosY, floa
 float cropHeight, float scaleX, float scaleY, b2Vec2* position, b2BodyType bodyType, b2World*& world, sf::RenderWindow*& window) : 
 GameObject(texture, cropPosX, cropPosY, cropWidth, cropHeight, scaleX, scaleY, position, bodyType, world, window)
 {
-    sprite->setOrigin(sprite->getLocalBounds().width / 2, 0.f);
+    sprite->setOrigin(sprite->getLocalBounds().width / 2, sprite->getLocalBounds().height / 2);
     boxCollider->GetBoxShape()->setOrigin(sprite->getOrigin());
+    boxCollider->FreezeRotation();
 }
 
 void Character::Move(b2Vec2* direction)

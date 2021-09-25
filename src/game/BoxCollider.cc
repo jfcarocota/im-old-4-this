@@ -68,3 +68,8 @@ void BoxCollider::Move(b2Vec2* direction)
 {
     rigidbody->GetBody()->SetLinearVelocity(*direction);
 }
+
+void BoxCollider::FreezeRotation()
+{
+    rigidbody->FrezzeRotation();
+}

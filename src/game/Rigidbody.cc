@@ -41,3 +41,8 @@ void Rigidbody::SetSensor(bool status)
 {
     fixture->SetSensor(status);
 }
+
+void Rigidbody::FrezzeRotation()
+{
+    body->SetFixedRotation(true);
+}
